@@ -28,6 +28,14 @@
                     document.getElementById("alamat").innerHTML = obj.alamat;
                 });
             }
+            
+            function callXMLAjax() {
+                getAjax('/JWP08/ActionXmlServlet', function(data){ 
+                    var content = ( new window.DOMParser() ).parseFromString(data, "text/xml");
+                    document.getElementById("nama").innerHTML = content.getElementsByTagName("nama")[0].childNodes[0].nodeValue;
+                    document.getElementById("alamat").innerHTML = content.getElementsByTagName("alamat")[0].childNodes[0].nodeValue;
+                });
+            }
         </script>
     </head>
     <body>
@@ -37,7 +45,12 @@
         <table>
             <tr>
                 <td>
-                    <input type="button" onclick="callAjax();" value="call" />
+                    <input type="button" onclick="callAjax();" value="call JSON" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" onclick="callXMLAjax();" value="call XML" />
                 </td>
             </tr>
             <tr>
